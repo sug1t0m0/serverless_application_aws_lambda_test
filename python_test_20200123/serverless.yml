@@ -57,18 +57,6 @@ provider:
 #    - exclude-me.py
 #    - exclude-me-dir/**
 
-# サービス名を指定
-service: slf-sample
-
-# 使用するクラウドサービス(AWS)と言語(Pytho3.6)を指定
-provider:
-  name: aws
-  runtime: python3.6
-
-  # ステージを指定。開発と本番環境を切り分けることができます。
-  stage: dev
-  # デプロイするリージョンを指定
-  region: ap-northeast-1
   # Lambdaに適用するIAM Roleを指定
   role: arn:aws:iam::790499047482:role/lambda_basic_execution
 
