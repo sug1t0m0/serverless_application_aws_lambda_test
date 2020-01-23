@@ -88,4 +88,4 @@ functions:
               pattern: '.*"statusCode": 401,.*'
               template: $input.path("$.errorMessage")
               headers:
-                Content-Type: "'application/octet-stream'
+                Content-Type: "'application/octet-stream'"
