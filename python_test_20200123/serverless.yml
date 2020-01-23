@@ -58,7 +58,7 @@ provider:
 #    - exclude-me-dir/**
 
   # Lambdaに適用するIAM Roleを指定
-  role: arn:aws:iam::790499047482:role/lambda_basic_execution
+  role: arn:aws:iam::*:role/lambda_basic_execution
 
 # Lambdaを構築
 functions:
