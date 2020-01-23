@@ -43,11 +43,10 @@ def hello(event, context):
         raise UnAuthorizationError(401,"errorMessage")
 
     # body部の取得
-    body = json.parse(event['body'])
+    body = json.loads(base64.b64decode(event['body']).decode('utf-8'))
     id = body['id']
     name = body['name']
 
-    # イベントデータの表示
     logger.info('headers:' + str(id))
     logger.info('body:' + str(name))
 
