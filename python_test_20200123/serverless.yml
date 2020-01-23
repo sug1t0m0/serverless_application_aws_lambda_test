@@ -69,24 +69,23 @@ functions:
           # リソースを指定
           path: sample/test
           # メソッドを指定
-            # メソッドを指定
-            method: post
-            # 統合サービスをLambdaにする
-            integration: lambda
-            # カスタムレスポンスの作成
-            response:
-              # ヘッダーとテンプレートの指定
-              headers:
-                Content-Type: "'application/octet-stream'"
-              template: $input.path('$')
-              # カスタムレスポンスコードの設定
-              statusCodes:
-                # デフォルトのステータスコード
-                200:
-                  pattern: ''
-                # カスタムステータスコード
-                401:
-                  pattern: '.*"statusCode": 401,.*'
-                  template: $input.path("$.errorMessage")
-                  headers:
-                    Content-Type: "'application/octet-stream'"
+          method: post
+          # 統合サービスをLambdaにする
+          integration: lambda
+          # カスタムレスポンスの作成
+          response:
+            # ヘッダーとテンプレートの指定
+            headers:
+              Content-Type: "'application/octet-stream'"
+            template: $input.path('$')
+            # カスタムレスポンスコードの設定
+            statusCodes:
+              # デフォルトのステータスコード
+              200:
+                pattern: ''
+              # カスタムステータスコード
+              401:
+                pattern: '.*"statusCode": 401,.*'
+                template: $input.path("$.errorMessage")
+                headers:
+                  Content-Type: "'application/octet-stream'
