@@ -43,9 +43,13 @@ def hello(event, context):
         raise UnAuthorizationError(401,"errorMessage")
 
     # body部の取得
-    body = json.loads(json.dumps(event['body']))
+    body = json.loads(json.dumps(event['body']).decode('utf-8'))
     id = body['id']
     name = body['name']
+
+    # イベントデータの表示
+    logger.info('headers:' + str(id))
+    logger.info('body:' + str(name))
 
     # DynamoDBにレコードの登録
     put(id,name)
