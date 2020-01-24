@@ -57,7 +57,10 @@ provider:
 #    - exclude-me.py
 #    - exclude-me-dir/**
 
+
+# Lambdaを構築
 functions:
+  # 関数名を指定
   hello:
     # handler関数を指定
     handler: handler.hello
@@ -69,4 +72,64 @@ functions:
           # リソースを指定
           path: sample/test
           # メソッドを指定
-          method: get
+          method: post
+          # 統合サービスをLambdaにする
+          integration: lambda
+          # カスタムリクエストの作成
+          request:
+            # カスタムテンプレートの作成
+            template:
+              application/octet-stream:
+                '{"headers":{
+                  #foreach($key in $input.params().header.keySet())
+                  "$key": "$input.params().header.get($key)"#if($foreach.hasNext),#end
+                  #end
+                  },
+                  "body": "$util.base64Encode($input.json(''$''))"
+                  }'
+          # カスタムレスポンスの作成
+          response:
+            # ヘッダーとテンプレートの指定
+            headers:
+              Content-Type: "'application/octet-stream'"
+            template: $input.path('$')
+            # カスタムレスポンスコードの設定
+            statusCodes:
+              # デフォルトのステータスコード
+              200:
+                pattern: ''
+              # カスタムステータスコード
+              401:
+                pattern: '.*"statusCode": 401,.*'
+                template: $input.path("$.errorMessage")
+                headers:
+                  Content-Type: "'application/octet-stream'"
+# リソースの構築
+resources:
+  Resources:
+    # DynamoDBの構築
+    DynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        # キーの型を指定
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+          -
+            AttributeName: name
+            AttributeType: S
+        # キーの種類を指定（ハッシュorレンジキー）
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+          -
+            AttributeName: name
+            KeyType: RANGE
+        # プロビジョニングするキャパシティーユニットの設定
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        # テーブル名の指定
+        TableName: TableName
