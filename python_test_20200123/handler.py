@@ -45,13 +45,14 @@ def hello(event, context):
     # body部の取得
     body = json.loads(json.dumps(event['body']))
     id = body['id']
+    type = body['type']
     name = body['name']
 
     logger.info('headers:' + str(id))
     logger.info('body:' + str(name))
 
     # DynamoDBにレコードの登録
-    put(id,name)
+    put(id,type,name)
     # DynamoDBから全件取得
     result = scan()
 
@@ -64,7 +65,7 @@ def hello(event, context):
     return response
 
 
-def put(id,name):
+def put(id, type, name):
     """
     DynamoDBにレコードを登録する関数
     @Param id ハッシュキー
@@ -73,12 +74,13 @@ def put(id,name):
     table.put_item(
         Item = {
             "id" : id,
+            "type" : type,
             "name" : name,
         }
     )
 
 
-def query(id,name):
+def query(id, name, type):
     """
     DynamoDBから検索する関数
     @Param id ハッシュキー
@@ -88,6 +90,7 @@ def query(id,name):
     result = table.get_item(
         Key = {
             'id' : id,
+            'type' : type,
             'name' : name,
         }
     )

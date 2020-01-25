@@ -117,6 +117,9 @@ resources:
             AttributeName: id
             AttributeType: S
           -
+            AttributeName: type
+            AttributeType: S
+          -
             AttributeName: name
             AttributeType: S
         # キーの種類を指定（ハッシュorレンジキー）
@@ -125,8 +128,9 @@ resources:
             AttributeName: id
             KeyType: HASH
           -
-            AttributeName: name
+            AttributeName: type
             KeyType: RANGE
+
         # プロビジョニングするキャパシティーユニットの設定
         ProvisionedThroughput:
           ReadCapacityUnits: 1
