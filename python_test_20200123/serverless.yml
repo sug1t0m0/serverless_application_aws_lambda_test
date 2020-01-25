@@ -130,7 +130,6 @@ resources:
           -
             AttributeName: type
             KeyType: RANGE
-
         # プロビジョニングするキャパシティーユニットの設定
         ProvisionedThroughput:
           ReadCapacityUnits: 1
