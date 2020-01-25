@@ -80,7 +80,7 @@ def put(id, type, name):
     )
 
 
-def query(id, name, type):
+def query(id, type, name):
     """
     DynamoDBから検索する関数
     @Param id ハッシュキー
