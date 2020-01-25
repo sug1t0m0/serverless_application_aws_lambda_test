@@ -50,9 +50,10 @@ def hello(event, context):
 
     logger.info('headers:' + str(id))
     logger.info('body:' + str(name))
+    logger.info('type:' + str(type))
 
     # DynamoDBにレコードの登録
-    put(id,type,name)
+    put(id, type, name)
     # DynamoDBから全件取得
     result = scan()
 
