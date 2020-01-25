@@ -129,7 +129,7 @@ resources:
             KeyType: HASH
           -
             AttributeName: type
-            KeyType: HASH
+            KeyType: RANGE
 
         # プロビジョニングするキャパシティーユニットの設定
         ProvisionedThroughput:
