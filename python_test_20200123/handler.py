@@ -22,7 +22,7 @@ logger.setLevel(logging.INFO)
 
 # DynamoDBオブジェクトの作成
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('TableName')
+table = dynamodb.Table('TableName1')
 
 
 def hello(event, context):

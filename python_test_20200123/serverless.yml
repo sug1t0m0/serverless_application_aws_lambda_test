@@ -131,4 +131,4 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         # テーブル名の指定
-        TableName: TableName
+        TableName: TableName1
