@@ -92,10 +92,8 @@ def get(event, context):
     logger.info('body:' + str(name))
     logger.info('type:' + str(type))
 
-    # DynamoDBにレコードの登録
-    query(id, type, name)
-    # DynamoDBから全件取得
-    result = scan()
+    # DynamoDBから取得
+    result = query(id, type)
 
     # レスポンスデータの作成
     response = {
