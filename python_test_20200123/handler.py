@@ -89,8 +89,6 @@ def get(event, context):
     id = query_params['id']
     type = query_params['type']
 
-    logger.info('headers:' + str(id))
-    logger.info('type:' + str(type))
 
     # DynamoDBから取得
     result = query(id, type)
@@ -98,7 +96,7 @@ def get(event, context):
     # レスポンスデータの作成
     response = {
         "statusCode": 200,
-        "body": json.dumps(result['Items'])
+        "body": json.dumps(result)
     }
 
     return response
