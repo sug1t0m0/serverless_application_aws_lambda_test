@@ -129,7 +129,10 @@ functions:
                   "$key": "$input.params().header.get($key)"#if($foreach.hasNext),#end
                   #end
                   },
-                  "body": "$util.base64Encode($input.params())"
+                  "body": {
+                  #foreach($key in $input.params())
+                  "$key": "$input.params().get($key)"#if($foreach.hasNext),#end
+                  #end
                   }
                   }'
           # カスタムレスポンスの作成
