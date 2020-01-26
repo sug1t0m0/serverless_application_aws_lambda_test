@@ -35,6 +35,7 @@ def hello(event, context):
     # イベントデータの表示
     logger.info('headers:' + str(event['headers']))
     logger.info('body:' + str(event['body']))
+    logger.info('event:' + str(event))
 
     # 認証情報の取得
     authoriztion = str(event['headers']['Authorization'])
