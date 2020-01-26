@@ -84,8 +84,7 @@ functions:
                   #foreach($key in $input.params().header.keySet())
                   "$key": "$input.params().header.get($key)"#if($foreach.hasNext),#end
                   #end
-                  },
-                  "body": "$input.json(''$'')"
+                  }
                   }'
           # カスタムレスポンスの作成
           response:

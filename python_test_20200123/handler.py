@@ -76,7 +76,7 @@ def get(event, context):
     # イベントデータの表示
     logger.info('headers:' + str(event['headers']))
     logger.info('body:' + str(event['body']))
-    logger.info('event:' + str(event))
+    logger.info('query:' + str(event['query']))
 
     # 認証情報の取得
     authoriztion = str(event['headers']['Authorization'])
@@ -85,13 +85,11 @@ def get(event, context):
         raise UnAuthorizationError(401,"errorMessage")
 
     # body部の取得
-    body = json.loads(json.dumps(event['body']))
-    id = body['id']
-    type = body['type']
-    name = body['name']
+    query = event['query']
+    id = query['id']
+    type = query['type']
 
     logger.info('headers:' + str(id))
-    logger.info('body:' + str(name))
     logger.info('type:' + str(type))
 
     # DynamoDBから取得
