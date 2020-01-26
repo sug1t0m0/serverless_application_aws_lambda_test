@@ -131,7 +131,7 @@ functions:
                   },
                   "body": {
                   "id": "$input.params(`id`)",
-                  "type": "$input.params(`type')",
+                  "type": "$input.params(`type`)",
                   }
                   }'
           # カスタムレスポンスの作成
