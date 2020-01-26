@@ -129,7 +129,7 @@ functions:
                   "$key": "$input.params().header.get($key)"#if($foreach.hasNext),#end
                   #end
                   },
-                  "body": "$input.params('sample/test')"
+                  "body": "$input.params()"
                   }'
           # カスタムレスポンスの作成
           response:
