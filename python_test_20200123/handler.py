@@ -65,6 +65,46 @@ def hello(event, context):
 
     return response
 
+def get(event, context):
+    """
+    AWS Lambda Handler関数
+    @Param event イベントデータ　APIGatewayからのデータ
+    @Param content Lambdaのランタイムデータ
+    @return APIGatewayのレスポンスデータ
+    """
+    # イベントデータの表示
+    logger.info('headers:' + str(event['headers']))
+    logger.info('body:' + str(event['body']))
+
+    # 認証情報の取得
+    authoriztion = str(event['headers']['Authorization'])
+    # 独自認証。失敗した場合はExceptionを発生させ、カスタムレスポンスコード401を返す。
+    if authoriztion != 'test':
+        raise UnAuthorizationError(401,"errorMessage")
+
+    # body部の取得
+    body = json.loads(json.dumps(event['body']))
+    id = body['id']
+    type = body['type']
+    name = body['name']
+
+    logger.info('headers:' + str(id))
+    logger.info('body:' + str(name))
+    logger.info('type:' + str(type))
+
+    # DynamoDBにレコードの登録
+    query(id, type, name)
+    # DynamoDBから全件取得
+    result = scan()
+
+    # レスポンスデータの作成
+    response = {
+        "statusCode": 200,
+        "body": json.dumps(result['Items'])
+    }
+
+    return response
+
 
 def put(id, type, name):
     """
@@ -81,7 +121,7 @@ def put(id, type, name):
     )
 
 
-def query(id, type, name):
+def query(id, type):
     """
     DynamoDBから検索する関数
     @Param id ハッシュキー
@@ -92,7 +132,6 @@ def query(id, type, name):
         Key = {
             'id' : id,
             'type' : type,
-            'name' : name,
         }
     )
     return result
