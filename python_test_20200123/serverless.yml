@@ -130,8 +130,8 @@ functions:
                   #end
                   },
                   "body": {
-                  "id": "$input.params('id')",
-                  "type": "$input.params('type')"
+                  "id": "$input.params(`id`)",
+                  "type": "$input.params(`type')",
                   }
                   }'
           # カスタムレスポンスの作成
