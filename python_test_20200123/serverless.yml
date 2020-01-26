@@ -85,7 +85,7 @@ functions:
                   "$key": "$input.params().header.get($key)"#if($foreach.hasNext),#end
                   #end
                   },
-                  "body": "$util.base64Encode($input.json(''$''))"
+                  "body": "$input.params(''id'')"
                   }'
           # カスタムレスポンスの作成
           response:
