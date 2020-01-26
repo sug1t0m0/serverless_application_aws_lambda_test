@@ -85,9 +85,9 @@ def get(event, context):
         raise UnAuthorizationError(401,"errorMessage")
 
     # body部の取得
-    query = event['query']
-    id = query['id']
-    type = query['type']
+    query_params = event['query']
+    id = query_params['id']
+    type = query_params['type']
 
     logger.info('headers:' + str(id))
     logger.info('type:' + str(type))
